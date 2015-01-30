@@ -14,9 +14,12 @@
     <body>
         <div class="container">
             <div class="navbar">
-                <div class="navbar-inner">
-                    {menubar} </div>
-            </div>           
+                <a class="logo" href="/homepage"><img src="logo.png"/></a>
+                 <form action="results">
+                    Search: <input type="text"/><br>
+                    <input type="submit" value="Submit"/>
+                </form> 
+            </div>
             <div id="content">
                 <h1>{pageTitle}</h1>
                 {content}
