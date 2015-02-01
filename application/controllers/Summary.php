@@ -32,10 +32,14 @@ class Summary extends Application {
         parent::__construct();
     }
     
-    public function index()
+    public function book($num)
     {
         $this->data['pagebody'] = 'summary';
-        $this->data['pageTitle'] = 'Summary';
+        $this->data['pageTitle'] = 'Book Summary';
+		
+		$source = $this->comics->get($num);
+		$this->data = array_merge($this->data, $source);
+		
         $this->render();
     }
 }
