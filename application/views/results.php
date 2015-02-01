@@ -6,9 +6,9 @@
 ?>
 <div class="results">
     <h1>
-        BOOKS THAT YA SEARCHED FOR
+        COMICS THAT YA SEARCHED FOR
     </h1>
-    {books}
-        <div class="searchBooks"><a href="{href}">{bookTitle}</a></div>
-    {/books}
+    {comics}
+        <div class="searchBooks"><a href="{where}">{title}</a></div>
+    {/comics}
 </div>

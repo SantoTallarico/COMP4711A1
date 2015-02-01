@@ -5,10 +5,10 @@
  */
 ?>
 <div class="homepage">
-    <h1>NEW BOOKS</h1>
+    <h1>NEW COMICS</h1>
     <div class="row">
-        {books}
-        <div class="newBooks"><a href="{href}">{bookTitle}</a></div>
-        {/books}
+        {comics}
+        <div class="newBooks"><a href="summary">{title}</a></div>
+        {/comics}
     </div>
 </div>
