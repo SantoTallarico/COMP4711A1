@@ -15,7 +15,7 @@
     <body>
         <div class="container">
             <div class="navbar">
-                <a class="logo" href="/homepage"><img src="logo.png"/></a>
+                <a class="logo" href="/../homepage"><img src="/logo.png"/></a>
                  <form action="results">
                     Search: <input type="text"/><br>
                     <input type="submit" value="Submit"/>

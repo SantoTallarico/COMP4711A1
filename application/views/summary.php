@@ -25,5 +25,5 @@
 		</p>
     <div class="chapterlist">
 	<h4>Chapters:</h4>
-        <a href="reading">Chapter 1</a>
+        <a href="/reading">Chapter 1</a>
 </div>
