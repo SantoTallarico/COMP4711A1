@@ -21,6 +21,7 @@
                     Search: <input type="text"/><br>
                     <input id="submit" type="submit" value="Submit"/>
                 </form> 
+                <a id = "admin" href="/admin">Admin Page</a>
             </div>
             <div id="content">
                 <h1>{pageTitle}</h1>
