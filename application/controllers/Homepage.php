@@ -36,16 +36,8 @@ class Homepage extends Application {
     {
         $this->data['pagebody'] = 'homepage';
         $this->data['pageTitle'] = 'Homepage';
-		
-		// Create the links for all comic books
-		$source = $this->comics->all();
-        $authors = array();
-		
-		foreach ($source as $record) {
-            $authors[] = array('title' => $record['title'], 'href' => $record['where']);
-        }
-        $this->data['comics'] = $authors;
-		
+	
+	$this->data['comics'] = $this->comics->all();	
         $this->render();
     }
 }

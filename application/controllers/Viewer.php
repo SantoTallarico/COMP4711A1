@@ -21,7 +21,7 @@ class Viewer extends Application {
     function index()
     {
 	$this->data['pagebody'] = 'homepage';    // this is the view we want shown
-	$this->data['authors'] = $this->quotes->all();
+	$this->data['authors'] = $this->comics->all();
 	$this->render();
     }
 
