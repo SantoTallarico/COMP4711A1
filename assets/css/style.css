@@ -1,0 +1,34 @@
+html,
+body {
+   margin:0;
+   padding:0;
+   height:100%;
+}
+.container {
+	min-height:100%;
+	position:relative;
+	background:#e33;
+}
+.navbar {
+	padding:10px;
+	background:#ee5;
+}
+#search {
+	float:right;
+}
+#submit {
+	float:left;
+}
+#content {
+	padding:10px;
+	padding-bottom:30px; /* Height of the footer element */
+	height:100%;
+}
+#footer {
+	width:100%;
+	height:30px;
+	position:absolute;
+	bottom:0;
+	left:0;
+	background:#ee5;
+}

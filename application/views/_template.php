@@ -10,15 +10,18 @@
         <title>{siteTitle}</title>
         <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="/assets/css/style.css"/>
+        {caboose_styles}
     </head>
     <body>
         <div class="container">
             <div class="navbar">
-                <a class="logo" href="/homepage"><img src="logo.png"/></a>
-                 <form action="results">
+                <a class="logo" href="/homepage"><img src="/logo.png"/></a>
+                 <form id="search" action="results">
                     Search: <input type="text"/><br>
-                    <input type="submit" value="Submit"/>
+                    <input id="submit" type="submit" value="Submit"/>
                 </form> 
+                <a id = "admin" href="/admin">Admin Page</a>
             </div>
             <div id="content">
                 <h1>{pageTitle}</h1>
@@ -28,5 +31,7 @@
                 Kappa Industries
             </div>
         </div>
+        {caboose_scripts}
+        {caboose_trailings}
     </body>
 </html>
