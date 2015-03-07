@@ -90,6 +90,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['summary/(:num)'] = "summary/book/$1";
+$route['summary/results'] = "results";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
