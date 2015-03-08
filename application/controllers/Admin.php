@@ -51,9 +51,13 @@ class Admin extends Application {
                 . "identifier, system-assigned", 10, 10, true);
         $this->data['ftitle'] = makeTextField('Title', 'title', $book->title);
         $this->data['fauthor'] = makeTextField('Author', 'author', $book->author);
-        $this->data['fdate_pub'] = makeTextArea('Date Published', 'date_pub', $book->date_pub);
-        $this->data['fdate_load'] = makeTextField('Date Uploaded', 'date_load', $book->date_load);
-        $this->data['fuploader'] = makeTextArea('Uploader', 'uploader', $book->uploader);
+        $this->data['fdate_pub'] = makeTextField('Date Published', 'date_pub', $book->date_pub);
+        $date = new DateTime(null, new DateTimeZone('America/New_York'));
+        $formatDate = $date->format('Y-m-d');
+        $book->date_load = $formatDate;
+        $this->data['fdate_load'] = makeTextField('Date Uploaded', 'date_load', $book->date_load, "Auto date insert"
+                , 10, 10, true);
+        $this->data['fuploader'] = makeTextField('Uploader', 'uploader', $book->uploader);
         $this->data['pagebody'] = 'book_edit';
         $this->data['fsubmit'] = makeSubmitButton('Process Book',
                 "Click here to validate the book data", 'btn-success');
@@ -69,15 +73,23 @@ class Admin extends Application {
         $record->title = $this->input->post('title');
         $record->author = $this->input->post('author');
         $record->date_pub = $this->input->post('date_pub');
-        $record->date_load = $this->input->post('date_load');
+        $date = new DateTime(null, new DateTimeZone('America/New_York'));
+        $formatDate = $date->format('Y-m-d');
+        $record->date_load = $formatDate;
         $record->uploader = $this->input->post('uploader');
         // validation
         if(empty($record->title))
             $this->errors[] = 'You must specify a title.';
         if(empty($record->author))
             $this->errors[] = 'You must specify an author.';
+        if(empty($record->date_pub))
+            $this->errors[] = 'You must specify a publish date.';
         if(empty($record->uploader))
             $this->errors[] = 'You must specify an uploader.';
+        
+        $dt = DateTime::createFromFormat("Y-m-d", $record->date_pub);
+        if(empty($dt))
+            $this->error[] = 'Date format is YYYY/MM/DD';
 
         // redisplay if any errors
         if(count($this->errors) > 0)
