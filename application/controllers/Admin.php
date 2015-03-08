@@ -21,7 +21,7 @@ class Admin extends Application {
 
     function index()
     {
-        $this->data['title'] = 'Books Maintenance';	
+        $this->data['pageTitle'] = 'Books Maintenance';	
         $this->data['books'] = $this->comics->all();
         $this->data['pagebody'] = 'admin_list';    // this is the view we want shown
 	$this->render();
