@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 08, 2015 at 11:21 PM
+-- Generation Time: Mar 09, 2015 at 12:03 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `books` (
 --
 
 INSERT INTO `books` (`bookID`, `title`, `author`, `date_pub`, `date_load`, `uploader`) VALUES
-(0000000001, '50 Shades of Grey', 'E. L. James', '2011-03-01', '2015-03-05', 'admin'),
+(0000000001, '50 Shades of Grey', 'E. L. James', '2011-03-01', '2015-03-08', 'admin'),
 (0000000002, '1984', 'George Orwell', '1949-06-08', '2015-03-05', 'admin'),
 (0000000003, 'The Fellowship of the Ring', 'J. R. R. Tolkien', '1954-06-01', '2015-03-08', 'admin'),
 (0000000004, 'The Two Towers', 'J. R. R. Tolkien', '1954-11-01', '2015-03-08', 'admin'),
@@ -56,28 +56,29 @@ INSERT INTO `books` (`bookID`, `title`, `author`, `date_pub`, `date_load`, `uplo
 
 CREATE TABLE IF NOT EXISTS `book_genres` (
   `bookID` int(10) unsigned zerofill NOT NULL,
-  `genreID` int(8) unsigned zerofill NOT NULL
+  `genreID` int(8) unsigned zerofill NOT NULL,
+  `genreName` varchar(255) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `book_genres`
 --
 
-INSERT INTO `book_genres` (`bookID`, `genreID`) VALUES
-(0000000002, 00000002),
-(0000000002, 00000003),
-(0000000001, 00000001),
-(0000000001, 00000005),
-(0000000007, 00000002),
-(0000000007, 00000003),
-(0000000003, 00000001),
-(0000000003, 00000002),
-(0000000004, 00000001),
-(0000000004, 00000002),
-(0000000005, 00000001),
-(0000000005, 00000002),
-(0000000006, 00000001),
-(0000000006, 00000002);
+INSERT INTO `book_genres` (`bookID`, `genreID`, `genreName`) VALUES
+(0000000002, 00000002, 'Adventure'),
+(0000000002, 00000003, 'Horror'),
+(0000000001, 00000001, 'Action'),
+(0000000001, 00000005, 'Romance'),
+(0000000007, 00000002, 'Adventure'),
+(0000000007, 00000003, 'Horror'),
+(0000000003, 00000001, 'Action'),
+(0000000003, 00000002, 'Adventure'),
+(0000000004, 00000001, 'Action'),
+(0000000004, 00000002, 'Adventure'),
+(0000000005, 00000001, 'Action'),
+(0000000005, 00000002, 'Adventure'),
+(0000000006, 00000001, 'Action'),
+(0000000006, 00000002, 'Adventure');
 
 -- --------------------------------------------------------
 
@@ -86,7 +87,7 @@ INSERT INTO `book_genres` (`bookID`, `genreID`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `genres` (
-`genreID` smallint(8) unsigned zerofill NOT NULL,
+`genreID` int(8) unsigned zerofill NOT NULL,
   `genreName` varchar(255) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
@@ -112,6 +113,12 @@ ALTER TABLE `books`
  ADD PRIMARY KEY (`bookID`), ADD UNIQUE KEY `bookID` (`bookID`);
 
 --
+-- Indexes for table `book_genres`
+--
+ALTER TABLE `book_genres`
+ ADD KEY `genreID` (`genreID`);
+
+--
 -- Indexes for table `genres`
 --
 ALTER TABLE `genres`
@@ -130,7 +137,17 @@ MODIFY `bookID` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT COMMENT 'A boo
 -- AUTO_INCREMENT for table `genres`
 --
 ALTER TABLE `genres`
-MODIFY `genreID` smallint(8) unsigned zerofill NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `genreID` int(8) unsigned zerofill NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `book_genres`
+--
+ALTER TABLE `book_genres`
+ADD CONSTRAINT `book_genres_ibfk_1` FOREIGN KEY (`genreID`) REFERENCES `genres` (`genreID`);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
