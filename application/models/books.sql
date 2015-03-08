@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 08, 2015 at 11:15 PM
+-- Generation Time: Mar 08, 2015 at 11:21 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -19,37 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `books`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `book genres`
---
-
-CREATE TABLE IF NOT EXISTS `book genres` (
-  `bookID` int(10) unsigned zerofill NOT NULL,
-  `genreID` int(8) unsigned zerofill NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `book genres`
---
-
-INSERT INTO `book genres` (`bookID`, `genreID`) VALUES
-(0000000002, 00000002),
-(0000000002, 00000003),
-(0000000001, 00000001),
-(0000000001, 00000005),
-(0000000007, 00000002),
-(0000000007, 00000003),
-(0000000003, 00000001),
-(0000000003, 00000002),
-(0000000004, 00000001),
-(0000000004, 00000002),
-(0000000005, 00000001),
-(0000000005, 00000002),
-(0000000006, 00000001),
-(0000000006, 00000002);
 
 -- --------------------------------------------------------
 
@@ -78,6 +47,37 @@ INSERT INTO `books` (`bookID`, `title`, `author`, `date_pub`, `date_load`, `uplo
 (0000000005, 'The Return of the King', 'J. R. R. Tolkien', '1955-10-01', '2015-03-08', 'admin'),
 (0000000006, 'The Hobbit', 'J. R. R. Tolkien', '1937-09-01', '2015-03-08', 'admin'),
 (0000000007, 'Lord of the Flies', 'William Golding', '1954-09-17', '2015-03-08', 'admin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `book_genres`
+--
+
+CREATE TABLE IF NOT EXISTS `book_genres` (
+  `bookID` int(10) unsigned zerofill NOT NULL,
+  `genreID` int(8) unsigned zerofill NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `book_genres`
+--
+
+INSERT INTO `book_genres` (`bookID`, `genreID`) VALUES
+(0000000002, 00000002),
+(0000000002, 00000003),
+(0000000001, 00000001),
+(0000000001, 00000005),
+(0000000007, 00000002),
+(0000000007, 00000003),
+(0000000003, 00000001),
+(0000000003, 00000002),
+(0000000004, 00000001),
+(0000000004, 00000002),
+(0000000005, 00000001),
+(0000000005, 00000002),
+(0000000006, 00000001),
+(0000000006, 00000002);
 
 -- --------------------------------------------------------
 
