@@ -1,5 +1,7 @@
 <table cols="" border="0">
     <tr>
+        <th>Delete</th>
+        <th>Edit</th>
         <th>Book ID</th>
         <th>Title</th>
         <th>Author</th>
@@ -9,6 +11,8 @@
     </tr>
     {books}
     <tr>
+        <td><a class="btn" href="/admin/delete/{bookID}">Delete</a></td>
+        <td><a class="btn" href='/admin/edit/{bookID}'>Edit</button></td>
         <td>{bookID}</td>
         <td>{title}</td>
         <td>{author}</td>

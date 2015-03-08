@@ -34,7 +34,47 @@ class Admin extends Application {
         $this->present($book);
     }
     
+    // edit an existing book
+    function edit($bookID)
+    {
+        $book = $this->comics->get($bookID);
+        $this->Present($book);
+    }
+    
+    // delete an existing book
+    function delete($bookID)
+    {
+        $book = $this->comics->get($bookID);
+        $this->deletePresent($book);
+    }
+    
     //Present a quotation for adding/editing
+    function deletePresent($book)
+    {
+        // format any errors
+        $message ='';
+        if(count($this->errors) > 0)
+        {
+            foreach($this->errors as $booboo)
+            {
+                $message .=$booboo . BR;
+            }
+        }
+        $this->data['pageTitle'] = 'Delete Book';	
+        $this->data['message'] = $message;
+        $this->data['fbookID'] = makeTextField('ID#', 'bookID', $book->bookID, "", 10, 10);
+        $this->data['ftitle'] = makeTextField('Title', 'title', $book->title, "", 10, 10);
+        $this->data['fauthor'] = makeTextField('Author', 'author', $book->author, "", 10, 10);
+        $this->data['fdate_pub'] = makeTextField('Date Published', 'date_pub', $book->date_pub, "", 10, 10);
+        $this->data['fdate_load'] = makeTextField('Date Uploaded', 'date_load', $book->date_load, "", 10, 10);
+        $this->data['fuploader'] = makeTextField('Uploader', 'uploader', $book->uploader, "", 10, 10);
+        $this->data['pagebody'] = 'book_delete';
+        $this->data['fsubmit'] = makeSubmitButton('For Sure???',
+                "Click here to validate the book data", 'btn-success');
+        $this->render();
+    }    
+
+//Present a quotation for adding/editing
     function present($book)
     {
         // format any errors
@@ -48,18 +88,32 @@ class Admin extends Application {
         }
         $this->data['pageTitle'] = 'Add Book';	
         $this->data['message'] = $message;
-        $this->data['fbookID'] = makeTextField('ID#', 'bookID', $book->bookID, "Unique book "
+        if(empty($book->bookID)){
+            $this->data['fbookID'] = makeTextField('ID#', 'bookID', $book->bookID, "Unique book "
                 . "identifier, system-assigned" . BR, 10, 10, true);
+        }
+        else{
+            $this->data['fbookID'] = makeTextField('ID#', 'bookID', $book->bookID, "Unique book "
+                . "identifier, system-assigned" . BR, 10, 10);
+        }
+        
         $this->data['ftitle'] = makeTextField('Title', 'title', $book->title, ''.BR);
         $this->data['fauthor'] = makeTextField('Author', 'author', $book->author, ''.BR);
         $this->data['fdate_pub'] = makeTextField('Date Published', 'date_pub', $book->date_pub, "Date format:"
                 . " YYYY/MM/DD" . BR . BR);
-        $date = new DateTime(null, new DateTimeZone('America/New_York'));
         //auto insert upload date
+        $date = new DateTime(null, new DateTimeZone('America/New_York'));
         $formatDate = $date->format('Y-m-d');
-        $book->date_load = $formatDate;
-        $this->data['fdate_load'] = makeTextField('Date Uploaded', 'date_load', $book->date_load, "Auto date insert"
+        
+        if(empty($book->date_load)){
+            $book->date_load = $formatDate;
+            $this->data['fdate_load'] = makeTextField('Date Uploaded', 'date_load', $book->date_load, "Auto date insert"
                 .BR .BR, 10, 10, true);
+        }
+        else{
+            $this->data['fdate_load'] = makeTextField('Date Uploaded', 'date_load', $book->date_load, "Date format:"
+                . " YYYY/MM/DD" . BR . BR);
+        }
         $this->data['fuploader'] = makeTextField('Uploader', 'uploader', $book->uploader, ''.BR);
         $this->data['pagebody'] = 'book_edit';
         $this->data['fsubmit'] = makeSubmitButton('Process Book',
@@ -67,6 +121,21 @@ class Admin extends Application {
         $this->render();
     }
     
+    // delete a book
+    function confirmDelete()
+    {
+        $record = $this->comics->get($this->input->post('bookID'));
+        if($this->comics->exists($record->bookID))
+        {
+            $this->comics->delete($record->bookID);
+            redirect('/admin');
+        }
+        else
+        {
+            $this->deletePresent($record);
+        }
+            
+    }
     // process a quotation edit
     function confirm()
     {
@@ -106,7 +175,8 @@ class Admin extends Application {
             return;// make sure we don't try to save anything
         }
         // Save stuff
-        if(empty($record->bookID)) $this->comics->add($record);
+        //if(empty($record->bookID)) $this->comics->add($record);
+        if(empty($record->bookID)) $this->present($record);
         else $this->comics->update($record);
         redirect('/admin');
         
