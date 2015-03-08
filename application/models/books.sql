@@ -31,12 +31,12 @@ CREATE TABLE IF NOT EXISTS `books` (
   `title` text NOT NULL COMMENT 'A book''s title (The Green Mile)',
   `author` text NOT NULL COMMENT 'A book''s author (John Travolta)',
   `date_pub` date DEFAULT NULL COMMENT 'Date of publication',
-  `date_loaded` date NOT NULL COMMENT 'Date of upload',
+  `date_load` date NOT NULL COMMENT 'Date of upload',
   `uploader` text COMMENT 'Owner'
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
  
 --
--- Dumping data for table `books`
+-- Dumping data for table `book`
 --
  
 INSERT INTO `books` (`bookID`, `title`, `author`, `date_pub`, `date_load`, `uploader`) VALUES
@@ -70,7 +70,7 @@ INSERT INTO `genres` (`genreID`, `genreName`) VALUES
 --
  
 --
--- Indexes for table `books`
+-- Indexes for table `book`
 --
 ALTER TABLE `books`
  ADD PRIMARY KEY (`bookID`), ADD UNIQUE KEY `bookID` (`bookID`);
