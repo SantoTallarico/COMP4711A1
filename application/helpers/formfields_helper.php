@@ -26,7 +26,7 @@ if (!defined('APPPATH'))
  */
 if (!function_exists('makeTextField')) {
 
-    function makeTextField($label, $name, $value, $explain = "", $maxlen = 40, $size = 25, $disabled = false) {
+    function makeTextField($label, $name, $value, $explain = "", $maxlen = 40, $size = 25, $disabled = false, $readonly = false) {
         $CI = &get_instance();
         $parms = array(
             'label' => $label,
@@ -35,7 +35,8 @@ if (!function_exists('makeTextField')) {
             'explain' => $explain,
             'maxlen' => $maxlen,
             'size' => $size,
-            'disabled' => ($disabled ? 'disabled="disabled"' : '')
+            'disabled' => ($disabled ? 'disabled="disabled"' : ''),
+            'readonly' => ($readonly ? 'readonly ="readonly"' : '')
         );
         return $CI->parser->parse('_fields/textfield', $parms, true);
     }

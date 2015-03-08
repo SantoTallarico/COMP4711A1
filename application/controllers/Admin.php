@@ -60,14 +60,15 @@ class Admin extends Application {
                 $message .=$booboo . BR;
             }
         }
+        // textfields now are readonly to prevent tampering by user
         $this->data['pageTitle'] = 'Delete Book';	
         $this->data['message'] = $message;
-        $this->data['fbookID'] = makeTextField('ID#', 'bookID', $book->bookID, "", 10, 10);
-        $this->data['ftitle'] = makeTextField('Title', 'title', $book->title, "", 10, 10);
-        $this->data['fauthor'] = makeTextField('Author', 'author', $book->author, "", 10, 10);
-        $this->data['fdate_pub'] = makeTextField('Date Published', 'date_pub', $book->date_pub, "", 10, 10);
-        $this->data['fdate_load'] = makeTextField('Date Uploaded', 'date_load', $book->date_load, "", 10, 10);
-        $this->data['fuploader'] = makeTextField('Uploader', 'uploader', $book->uploader, "", 10, 10);
+        $this->data['fbookID'] = makeTextField('ID#', 'bookID', $book->bookID, "", 10, 10, "", true);
+        $this->data['ftitle'] = makeTextField('Title', 'title', $book->title, "", 10, 10, "", true);
+        $this->data['fauthor'] = makeTextField('Author', 'author', $book->author, "", 10, 10, "", true);
+        $this->data['fdate_pub'] = makeTextField('Date Published', 'date_pub', $book->date_pub, "", 10, 10, "", true);
+        $this->data['fdate_load'] = makeTextField('Date Uploaded', 'date_load', $book->date_load, "", 10, 10, "", true);
+        $this->data['fuploader'] = makeTextField('Uploader', 'uploader', $book->uploader, "", 10, 10, "", true);
         $this->data['pagebody'] = 'book_delete';
         $this->data['fsubmit'] = makeSubmitButton('For Sure???',
                 "Click here to validate the book data", 'btn-success');
@@ -88,13 +89,14 @@ class Admin extends Application {
         }
         $this->data['pageTitle'] = 'Add Book';	
         $this->data['message'] = $message;
+        //if it's add record then disable id
         if(empty($book->bookID)){
             $this->data['fbookID'] = makeTextField('ID#', 'bookID', $book->bookID, "Unique book "
                 . "identifier, system-assigned" . BR, 10, 10, true);
         }
         else{
             $this->data['fbookID'] = makeTextField('ID#', 'bookID', $book->bookID, "Unique book "
-                . "identifier, system-assigned" . BR, 10, 10);
+                . "identifier, system-assigned" . BR, 10, 10, "", true);
         }
         
         $this->data['ftitle'] = makeTextField('Title', 'title', $book->title, ''.BR);
