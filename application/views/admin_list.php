@@ -16,7 +16,7 @@
         <td>{date_load}</td>
         <td>{uploader}</td>
     </tr>
-    {/quotes}
+    {/books}
 </table>
 
-<a href='/admin/add'>Add a new quotation</a>
+<a href='/admin/add'>Add a new book</a>
