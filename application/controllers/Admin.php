@@ -22,7 +22,7 @@ class Admin extends Application {
     function index()
     {
         $this->data['title'] = 'Books Maintenance';	
-        $this->data['books'] = $this->books->all();
+        $this->data['books'] = $this->comics->all();
         $this->data['pagebody'] = 'admin_list';    // this is the view we want shown
 	$this->render();
     }
@@ -30,7 +30,7 @@ class Admin extends Application {
     // add a new quotation
     function add()
     {
-        $book = $this->books->create();
+        $book = $this->comics->create();
         $this->present($book);
     }
     
@@ -47,7 +47,7 @@ class Admin extends Application {
             }
         }
         $this->data['message'] = $message;
-        $this->data['fid'] = makeTextField('ID#', 'bookID', $book->bookID, "Unique book "
+        $this->data['fbookID'] = makeTextField('ID#', 'bookID', $book->bookID, "Unique book "
                 . "identifier, system-assigned", 10, 10, true);
         $this->data['ftitle'] = makeTextField('Title', 'title', $book->title);
         $this->data['fauthor'] = makeTextField('Author', 'author', $book->author);
@@ -63,7 +63,7 @@ class Admin extends Application {
     // process a quotation edit
     function confirm()
     {
-        $record = $this->books->create();
+        $record = $this->comics->create();
         // Extract submitted fields
         $record->bookID = $this->input->post('bookID');
         $record->title = $this->input->post('title');
@@ -86,8 +86,8 @@ class Admin extends Application {
             return;// make sure we don't try to save anything
         }
         // Save stuff
-        if(empty($record->bookID)) $this->books->add($record);
-        else $this->books->update($record);
+        if(empty($record->bookID)) $this->comics->add($record);
+        else $this->comics->update($record);
         redirect('/admin');
         
     }
