@@ -195,6 +195,121 @@ class Admin extends Application {
         $this->data['pagebody'] = 'genre_list';    // this is the view we want shown
 	$this->render();
     }
+    
+    // add a new quotation
+    function addGen()
+    {
+        $genre = $this->genres->create();
+        $this->presentGen($genre);
+    }
+
+    // edit an existing genre
+    function editGen($genreID)
+    {
+        $genre = $this->genres->get($genreID);
+        $this->presentGen($genre);
+    }
+    
+    // delete an existing genre
+    function deleteGen($genreID)
+    {
+        $genre = $this->genres->get($genreID);
+        $this->delGenPresent($genre);
+    }
+    
+    //Present a quotation for adding/editing
+    function delGenPresent($genre)
+    {
+        // format any errors
+        $message ='';
+        if(count($this->errors) > 0)
+        {
+            foreach($this->errors as $booboo)
+            {
+                $message .=$booboo . BR;
+            }
+        }
+        // textfields now are readonly to prevent tampering by user
+        $this->data['pageTitle'] = 'Delete Genre';	
+        $this->data['message'] = $message;
+        $this->data['fgenreID'] = makeTextField('ID#', 'genreID', $genre->genreID, "", 10, 10, "", true);
+        $this->data['fgenreName'] = makeTextField('Name', 'genreName', $genre->genreName, "", 20, 20, "", true);
+        $this->data['pagebody'] = 'genre_delete';
+        $this->data['fsubmit'] = makeSubmitButton('For Sure???',
+                "Click here to delete genre", 'btn-success');
+        $this->render();
+    }    
+
+//Present a quotation for adding/editing
+    function presentGen($genre)
+    {
+        // format any errors
+        $message ='';
+        if(count($this->errors) > 0)
+        {
+            foreach($this->errors as $booboo)
+            {
+                $message .=$booboo . BR;
+            }
+        }
+        $this->data['pageTitle'] = 'Add Genre';	
+        $this->data['message'] = $message;
+        //if it's add record then disable id
+        if(empty($genre->genreID)){
+            $this->data['fgenreID'] = makeTextField('ID#', 'genreID', $genre->genreID, "Unique genre "
+                . "identifier, system-assigned" . BR, 10, 10, true);
+        }
+        else{
+            $this->data['fgenreID'] = makeTextField('ID#', 'genreID', $genre->genreID, "Unique genre "
+                . "identifier, system-assigned" . BR, 10, 10, "", true);
+        }
+        
+        $this->data['fgenreName'] = makeTextField('Name', 'genreName', $genre->genreName, ''.BR);
+        $this->data['pagebody'] = 'genre_edit';
+        $this->data['fsubmit'] = makeSubmitButton('Process Genre',
+                "Click here to validate the genre data", 'btn-success');
+        $this->render();
+    }
+    
+    // delete a book
+    function confirmDeleteGen()
+    {
+        $record = $this->genres->get($this->input->post('genreID'));
+        if($this->genres->exists($record->genreID))
+        {
+            $this->genres->delete($record->genreID);
+            redirect('/admin/genre');
+        }
+        else
+        {
+            $this->delPresentGen($record);
+        }
+            
+    }
+    // process a quotation edit
+    function confirmGen()
+    {
+        $record = $this->genres->create();
+        // Extract submitted fields
+        $record->genreID = $this->input->post('genreID');
+        $record->genreName = $this->input->post('genreName');
+        // validation
+        if(empty($record->genreName))
+            $this->errors[] = 'You must specify a name.';
+        
+        // redisplay if any errors
+        if(count($this->errors) > 0)
+        {
+            $this->presentGen($record);
+            return;// make sure we don't try to save anything
+        }
+        // Save stuff
+        if(empty($record->genreID)) $this->genres->add($record);
+        //if(empty($record->bookID)) $this->present($record);
+        else $this->genres->update($record);
+        redirect('/admin/genre');
+        
+    }
 
 }
 
