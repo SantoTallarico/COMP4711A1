@@ -164,6 +164,9 @@ class Admin extends Application {
         
         if(empty($record->date_pub))
             $this->errors[] = 'You must specify a publish date. YYYY/MM/DD';
+        // check if date is after date published
+        if($record->date_load < $record->date_pub)
+            $this->errors[] = 'Date published should be before upload date';
         if(empty($record->uploader))
             $this->errors[] = 'You must specify an uploader.';
         
@@ -175,8 +178,8 @@ class Admin extends Application {
             return;// make sure we don't try to save anything
         }
         // Save stuff
-        //if(empty($record->bookID)) $this->comics->add($record);
-        if(empty($record->bookID)) $this->present($record);
+        if(empty($record->bookID)) $this->comics->add($record);
+        //if(empty($record->bookID)) $this->present($record);
         else $this->comics->update($record);
         redirect('/admin');
         
