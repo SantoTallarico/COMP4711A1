@@ -186,6 +186,15 @@ class Admin extends Application {
         redirect('/admin');
         
     }
+    
+    // For editing genre
+    function genre()
+    {
+        $this->data['pageTitle'] = 'Genre Maintenance';	
+        $this->data['genres'] = $this->genres->all();
+        $this->data['pagebody'] = 'genre_list';    // this is the view we want shown
+	$this->render();
+    }
 
 }
 

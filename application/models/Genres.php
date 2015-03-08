@@ -1,15 +1,15 @@
 <?php
 
 /**
- * This is a "CMS" model for comics.
+ * This is a "CMS" model for genres.
  *
  * @author peter chan
  */
-class Comics extends MY_Model {
+class Genres extends MY_Model {
 
     // Constructor
     public function __construct() {
-       parent::__construct('books', 'bookID');	
+       parent::__construct('genres', 'genreID');	
     }
     
     // retrieve the most recently added quote

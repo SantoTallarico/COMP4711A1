@@ -24,3 +24,4 @@
 </table>
 
 <a href='/admin/add'>Add a new book</a>
+<a href='/admin/genre'>Edit Genre</a>
