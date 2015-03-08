@@ -37,9 +37,13 @@ class Summary extends Application {
         $this->data['pagebody'] = 'summary';
         $this->data['pageTitle'] = 'Book Summary';
 		
-		$source = $this->comics->get($num);
-		$this->data = array_merge($this->data, $source);
-		
+        $source = (array) $this->comics->get($num);
+        $this->data['title'] = $source['title'];
+        $this->data['author'] = $source['author'];
+        $this->data['date_pub'] = $source['date_pub'];
+        $this->data['date_load'] = $source['date_load'];
+        $this->data['uploader'] = $source['uploader'];
+
         $this->render();
     }
 }
