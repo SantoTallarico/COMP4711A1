@@ -37,6 +37,9 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+// location of data folders
+//define('DATA_FOLDER', './data');
+
 /*
 |--------------------------------------------------------------------------
 | File and Directory Modes
@@ -72,6 +75,9 @@ define('FOPEN_WRITE_CREATE', 'ab');
 define('FOPEN_READ_WRITE_CREATE', 'a+b');
 define('FOPEN_WRITE_CREATE_STRICT', 'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT', 'x+b');
+
+// defines BREAK as BR
+define('BR', '<br/>');
 
 /*
 |--------------------------------------------------------------------------
