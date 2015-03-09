@@ -24,6 +24,7 @@ class Application extends CI_Controller {
         $this->data = array();
         $this->data['siteTitle'] = 'Book Reader';    // our default title
         $this->errors = array();
+        $this->load->helper('formfields');
     }
 
     /**
@@ -36,6 +37,10 @@ class Application extends CI_Controller {
         $this->data['caboose_styles'] = $this->caboose->styles();
         $this->data['caboose_scripts'] = $this->caboose->scripts();
         $this->data['caboose_trailings'] = $this->caboose->trailings();
+        
+        $this->data['fsearch'] = makeTextField('Search', 'search', '', ''.BR);
+        $this->data['fsearchsubmit'] = makeSubmitButton('Search Books',
+                "Click here to commence search", 'btn-success');
         
         // finally, build the browser page!
         $this->data['data'] = &$this->data;
