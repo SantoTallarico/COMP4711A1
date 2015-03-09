@@ -18,4 +18,10 @@ class Book_genres extends MY_Model {
 	return $this->get($key);
     }
 
+    public function advsearchgenre($genre) {
+        if(!empty($genre))
+            $this->db->like('genreName', $genre);
+        $query = $this->db->get('book_genres');
+        return $query;
+    }
 }

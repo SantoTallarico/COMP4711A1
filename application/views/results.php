@@ -16,8 +16,8 @@
     {books}
     <tr>
         <td>{bookID}</td>
-        <td>{title}</td>
-        <td>{genres}{genre}{/genres}</td>
+        <td><a href="/summary/{bookID}">{title}</a></td>
+        <td>{genre}</td>
         <td>{author}</td>
         <td>{uploader}</td>
     </tr>

@@ -47,14 +47,16 @@ class Search extends Application {
     public function advsearch() {
         $query = $this->comics->advsearch($this->input->post('title'), $this->input->post('author'),
                                 $this->input->post('uploader'));
-        $this->results($query);
+        $querygenres = $this->book_genres->advsearchgenre($this->input->post('genre'));
+        $this->results($query, $querygenres);
     }
     
-    public function results($query)
+    public function results($query, $querygenres)
     {
         $this->data['pagebody'] = 'results';
         $this->data['pageTitle'] = 'Results';
         $this->data['books'] = $query->result();
+        $this->data['genre'] = $querygenres->result();
         
         $this->render();
     }

@@ -17,11 +17,4 @@ class Genres extends MY_Model {
 	$key = $this->highest();
 	return $this->get($key);
     }
-
-    public function advsearchgenre($genre) {
-        if(!empty($genre))
-            $this->db->like('genreName', $genre);
-        $query = $this->db->get('genres');
-        return $query;
-    }
 }
