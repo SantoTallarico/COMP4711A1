@@ -20,7 +20,7 @@
 	<div class="synopsis">
 		<h4>Synopsis</h4>
 		<p>
-			A brief desciption of the book's general plot will be show here.
+			A brief description of the book's general plot will be show here.
 			Note that the chapter link will take you to the general skeleton of the
 			chapter page with no data displayed.
 		</p>

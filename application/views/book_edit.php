@@ -6,11 +6,11 @@
         {fauthor}
         
         <select multiple>
-            {genres}
+            {fgenres}
             <option>
                 {genreID}{genreName}
             </option>
-            {/genres}
+            {/fgenres}
         </select>
         
         {fdate_pub}

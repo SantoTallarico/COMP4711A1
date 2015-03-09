@@ -127,7 +127,7 @@ class Admin extends Application {
         }
         $this->data['fuploader'] = makeTextField('Uploader', 'uploader', $book->uploader, ''.BR);
         //genre list
-        $this->data['genres'] = $this->genres->all();
+        $this->data['fgenres'] = $this->genres->all();
         
         $this->data['pagebody'] = 'book_edit';
         $this->data['fsubmit'] = makeSubmitButton('Process Book',

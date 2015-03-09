@@ -34,6 +34,9 @@ class Summary extends Application {
         $this->data['date_pub'] = $source['date_pub'];
         $this->data['date_load'] = $source['date_load'];
         $this->data['uploader'] = $source['uploader'];
+        
+        $sourceGen = (array) $this->book_genres->get($num);
+        $this->data['genre'] = $sourceGen['genreName'];
 
         $this->render();
     }
