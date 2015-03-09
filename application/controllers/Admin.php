@@ -27,6 +27,15 @@ class Admin extends Application {
 	$this->render();
     }
     
+    // book_genres output
+    function book_genres()
+    {
+        $this->data['pageTitle'] = 'Book Genres Table';	
+        $this->data['genres'] = $this->book_genres->all();
+        $this->data['pagebody'] = 'book_genres';    // this is the view we want shown
+	$this->render();
+    }
+    
     // add a new quotation
     function add()
     {

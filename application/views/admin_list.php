@@ -25,3 +25,4 @@
 
 <a href='/admin/add'>Add a new book</a>
 <a href='/admin/genre'>Edit Genre</a>
+<a href='/admin/book_genres'>Book Genre List</a>
