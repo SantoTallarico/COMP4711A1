@@ -9,15 +9,16 @@
  */
 ?>
 <div class="summary">
-	<img src="/data/{pic}" title="{who}"/>
 	<div class="info">
 		<p>Title: {title}</p>
 		<p>Author: {author}</p>
-		<p>Genre: {genre}</p>
-		<p>Date Added: {date}</p>
+		<p>Genre(s): {genre}</p>
+                <p>Date Published: {date_pub}</p>
+		<p>Date Added: {date_load}</p>
+                <p>Uploader: {uploader}</p>
 	</div>
 	<div class="synopsis">
-		<h4>Sypnosis</h4>
+		<h4>Synopsis</h4>
 		<p>
 			A brief desciption of the book's general plot will be show here.
 			Note that the chapter link will take you to the general skeleton of the
