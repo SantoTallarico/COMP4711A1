@@ -117,6 +117,9 @@ class Admin extends Application {
                 . " YYYY/MM/DD" . BR . BR);
         }
         $this->data['fuploader'] = makeTextField('Uploader', 'uploader', $book->uploader, ''.BR);
+        //genre list
+        $this->data['genres'] = $this->genres->all();
+        
         $this->data['pagebody'] = 'book_edit';
         $this->data['fsubmit'] = makeSubmitButton('Process Book',
                 "Click here to validate the book data", 'btn-success');
@@ -142,6 +145,7 @@ class Admin extends Application {
     function confirm()
     {
         $record = $this->comics->create();
+        
         // Extract submitted fields
         $record->bookID = $this->input->post('bookID');
         $record->title = $this->input->post('title');
@@ -153,6 +157,16 @@ class Admin extends Application {
         $formatDate = $date->format('Y-m-d');
         $record->date_load = $formatDate;
         $record->uploader = $this->input->post('uploader');
+        // selected genres array
+        $arrayGen = array();
+        foreach($this->input->post('genres') as $genre)
+        {
+            $arrayGen[] = $genre;
+        }
+
+        
+        $recordGen = $this->genres->create();
+        $recordGen->genreID = $this->input->post('genres');
         // validation
         if(empty($record->title))
             $this->errors[] = 'You must specify a title.';
@@ -180,9 +194,33 @@ class Admin extends Application {
             return;// make sure we don't try to save anything
         }
         // Save stuff
-        if(empty($record->bookID)) $this->comics->add($record);
+        if(empty($record->bookID))
+        {
+            $this->comics->add($record);
+            //$this->book_genres->add($recordGen);
+            foreach($arrayGen as $gen)
+            {
+                $book_gen = $this->book_genres->create();
+                $book_gen->bookID = $this->comics->last()->bookID;
+                $book_gen->genreID = $gen->genreID;
+                $book_gen->genreName = $gen->genreName;
+                $this->book_genres->add($book_gen);
+            }
+        }
         //if(empty($record->bookID)) $this->present($record);
-        else $this->comics->update($record);
+        else
+        {
+            $this->comics->update($record);
+            //$this->book_genres->add($recordGen);
+            foreach($arrayGen as $gen)
+            {
+                $book_gen = $this->book_genres->create();
+                $book_gen->bookID = $this->comics->last()->bookID;
+                $book_gen->genreID = $gen->genreID;
+                $book_gen->genreName = $gen->genreName;
+                $this->book_genres->update($book_gen);
+            }
+        }
         redirect('/admin');
         
     }
@@ -252,7 +290,7 @@ class Admin extends Application {
                 $message .=$booboo . BR;
             }
         }
-        $this->data['pageTitle'] = 'Add Genre';	
+        $this->data['pageTitle'] = 'Add/Edit Genre';	
         $this->data['message'] = $message;
         //if it's add record then disable id
         if(empty($genre->genreID)){
@@ -277,6 +315,7 @@ class Admin extends Application {
         $record = $this->genres->get($this->input->post('genreID'));
         if($this->genres->exists($record->genreID))
         {
+            $this->book_genres->delete($record->genreID);
             $this->genres->delete($record->genreID);
             redirect('/admin/genre');
         }
@@ -306,7 +345,11 @@ class Admin extends Application {
         // Save stuff
         if(empty($record->genreID)) $this->genres->add($record);
         //if(empty($record->bookID)) $this->present($record);
-        else $this->genres->update($record);
+        else
+        {
+            $this->book_genres->update($record);
+            $this->genres->update($record);
+        }
         redirect('/admin/genre');
         
     }

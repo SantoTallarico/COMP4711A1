@@ -4,6 +4,15 @@
         {fbookID}
         {ftitle}
         {fauthor}
+        
+        <select multiple name="genres[]" multiple="multiple">
+            {genres}
+            <option>
+                {genreID}{genreName}
+            </option>
+            {/genres}
+        </select>
+        
         {fdate_pub}
         {fdate_load}
         {fuploader}
