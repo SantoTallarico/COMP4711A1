@@ -25,19 +25,24 @@ class Results extends Application {
         parent::__construct();
     }
     
-    public function index()
+    public function index($query)
     {
         $this->data['pagebody'] = 'results';
         $this->data['pageTitle'] = 'Results';
+        $this->data['books'] = $query->result();
+        
         $this->render();
     }
     
     public function searchtitle() {
         $input = $this->input->post('search');
-        $query = $this->comics->db->query("SELECT * FROM books b WHERE b.title LIKE '%$input%'");
+        $query = $this->comics->searchtitle($input);
         
-        $this->data['books'] = $query->result();
-        
-        $this->index();
+        $this->index($query);
+    }
+    
+    public function advsearch() {
+        $query = $this->session->flashdata('item');
+        $this->index($query);
     }
 }

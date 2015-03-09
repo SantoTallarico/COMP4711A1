@@ -17,4 +17,21 @@ class Comics extends MY_Model {
 	$key = $this->highest();
 	return $this->get($key);
     }
+    
+     public function searchtitle($input) {
+        $this->db->like('title', $input);
+        $query = $this->db->get('books');
+        return $query;
+    }
+    
+    public function advsearch($title, $author, $uploader) {
+        if(!empty($title))
+            $this->db->like('title', $title);
+        if(!empty($author))
+            $this->db->like('author', $author);
+        if(!empty($uploader))
+            $this->db->like('uploader', $uploader);
+        $query = $this->db->get('books');
+        return $query;
+    }
 }
