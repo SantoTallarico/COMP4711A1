@@ -344,12 +344,17 @@ class Admin extends Application {
             return;// make sure we don't try to save anything
         }
         // Save stuff
-        if(empty($record->genreID)) $this->genres->add($record);
+        if(empty($record->genreID))
+        {
+            $this->genres->add($record);
+        }
+        
         //if(empty($record->bookID)) $this->present($record);
         else
         {
             $this->book_genres->update($record);
             $this->genres->update($record);
+            
         }
         redirect('/admin/genre');
         
