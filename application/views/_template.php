@@ -17,11 +17,16 @@
         <div class="container">
             <div class="navbar">
                 <a class="logo" href="/homepage"><img src="/logo.png"/></a>
-                 <form id="search" action="results">
-                    Search: <input type="text"/><br>
-                    <input id="submit" type="submit" value="Submit"/>
-                </form> 
-                <a id = "admin" href="/admin">Admin Page</a>
+                <form action="/results/searchtitle" method="post">
+                    <div id="search">
+                        {fsearch}
+                    </div>
+                    <div id="submit">
+                        {fsearchsubmit}
+                    </div>
+                </form>
+                <a id="advanced_search" href="/search">Advanced Search</a>
+                <a id="admin" href="/admin">Admin Page</a>
             </div>
             <div id="content">
                 <h1>{pageTitle}</h1>

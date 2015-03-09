@@ -14,10 +14,12 @@ body {
 	background:#ee5;
 }
 #search {
-	float:right;
+        left:148px;
+        top:10px;
 }
 #submit {
-	float:left;
+        left:148px;
+        top:60px;
 }
 #content {
 	padding:10px;

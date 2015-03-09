@@ -5,10 +5,22 @@
  */
 ?>
 <div class="results">
-    <h1>
-        COMICS THAT YA SEARCHED FOR
-    </h1>
-    {comics}
-        <div class="searchBooks"><a href="{where}">{title}</a></div>
-    {/comics}
+    <table cols="" border="0">
+    <tr>
+        <th>Book ID</th>
+        <th>Title</th>
+        <th>Genre(s)</th>
+        <th>Author</th>
+        <th>Uploader</th>
+    </tr>
+    {books}
+    <tr>
+        <td>{bookID}</td>
+        <td>{title}</td>
+        <td>{genres}{genre}{/genres}</td>
+        <td>{author}</td>
+        <td>{uploader}</td>
+    </tr>
+    {/books}
+</table>
 </div>

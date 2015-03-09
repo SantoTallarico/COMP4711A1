@@ -1,15 +1,8 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of Results
  *
- * @author ShirleyPC
  */
 class Results extends Application {
 
@@ -37,5 +30,14 @@ class Results extends Application {
         $this->data['pagebody'] = 'results';
         $this->data['pageTitle'] = 'Results';
         $this->render();
+    }
+    
+    public function searchtitle() {
+        $input = $this->input->post('search');
+        $query = $this->comics->db->query("SELECT * FROM books b WHERE b.title LIKE '%$input%'");
+        
+        $this->data['books'] = $query->result();
+        
+        $this->index();
     }
 }

@@ -8,7 +8,7 @@
     <h1>NEW COMICS</h1>
     <div class="row">
         {comics}
-        <div class="newBooks"><a href="{href}">{title}</a></div>
+        <div class="newBooks"><a href="summary/{bookID}">{title}</a></div>
         {/comics}
     </div>
 </div>
