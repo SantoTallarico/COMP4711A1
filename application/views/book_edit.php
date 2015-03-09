@@ -5,7 +5,7 @@
         {ftitle}
         {fauthor}
         
-        <select multiple name="genres[]">
+        <select multiple>
             {genres}
             <option>
                 {genreID}{genreName}

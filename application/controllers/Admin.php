@@ -158,15 +158,7 @@ class Admin extends Application {
         $record->date_load = $formatDate;
         $record->uploader = $this->input->post('uploader');
         // selected genres array
-        $arrayGen = array();
-        foreach($this->input->post('genres') as $genre)
-        {
-            $arrayGen[] = $genre;
-        }
-
-        
-        $recordGen = $this->genres->create();
-        $recordGen->genreID = $this->input->post('genres');
+        $arrayGen = $this->input->post('genres');
         // validation
         if(empty($record->title))
             $this->errors[] = 'You must specify a title.';
