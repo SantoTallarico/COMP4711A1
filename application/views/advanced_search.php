@@ -8,8 +8,7 @@
 ?>
 <div class="advanced_search">
     <div class="row">
-        <div class="errors">{message}</div>
-        <form action="/results" method="post">
+        <form action="search/advsearch" method="post">
             {ftitle}
             {fauthor}
             {fgenre}

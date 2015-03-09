@@ -33,16 +33,6 @@ class Search extends Application {
     public function index() {
         $this->data['pageTitle'] = 'Advanced Search';
 
-        // format any errors
-        $message ='';
-        if(count($this->errors) > 0)
-        {
-            foreach($this->errors as $booboo)
-            {
-                $message .=$booboo . BR;
-            }
-        }
-        $this->data['message'] = $message;
         $this->data['ftitle'] = makeTextField('Title', 'title', '', ''.BR);
         $this->data['fauthor'] = makeTextField('Author', 'author', '', ''.BR);
         $this->data['fgenre'] = makeTextField('Genre', 'genre', '', ''.BR);
@@ -54,14 +44,25 @@ class Search extends Application {
         $this->render();
     }
     
-    public function search() {
-        if(!empty($this->data['ftitle']))
-            $this->comics->db->like('title', $this->data['ftitle']);
-        if(!empty($this->data['fauthor']))
-            $this->comics->db->like('author', $this->data['fauthor']);
-        if(!empty($this->data['fgenre']))
-            $this->comics->db->like('title', $this->data['fgenre']);
-        if(!empty($this->data['fuploader']))
-            $this->comics->db->like('uploader', $this->data['fuploader']);
+    public function advsearch() {
+        $query = $this->comics->advsearch($this->input->post('title'), $this->input->post('author'),
+                                $this->input->post('uploader'));
+        $this->results($query);
+    }
+    
+    public function results($query)
+    {
+        $this->data['pagebody'] = 'results';
+        $this->data['pageTitle'] = 'Results';
+        $this->data['books'] = $query->result();
+        
+        $this->render();
+    }
+    
+    public function searchtitle() {
+        $input = $this->input->post('search');
+        $query = $this->comics->searchtitle($input);
+        
+        $this->results($query);
     }
 }
